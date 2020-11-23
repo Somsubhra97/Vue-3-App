@@ -1,12 +1,12 @@
 <template>
   
-  <base-dialog v-if="confirmDel" title="Delete" ok="Confirm" @close="confirm">
-    <template #default>
+  <base-dialog v-if="confirmDel" title="Delete" ok="Close" @close="confirmClosure">
+    <template v-slot:default>
       <p>Do you want to delete?</p>
       <p>Click confirm to delete.</p>
     </template>
     <template #actions>
-      <base-button @click="confirmError">Okay</base-button>
+      <base-button @click="confirm">Okay</base-button>
     </template>
   </base-dialog>
 
@@ -37,6 +37,9 @@ export default {
     open_dialog(){
       this.confirmDel=true;
     },
+    confirmClosure(){
+      this.confirmDel=false;
+    }, 
     confirm(){
       if(this.confirmDel){
         this.deleteResource(this.id);
